@@ -108,23 +108,24 @@
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo d-block mb-2 text-center">Hotel<span>Advisor</span></a>
                                         <h5 class="text-muted fw-normal mb-4 text-center">Welcome Back! Login to Super Admin Account.</h5>
-                                        <form class="forms-sample">
+                                        <form method="POST" action="{{ route('super_admin.login') }}">
+                                            @csrf
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" id="userEmail" placeholder="Email">
+                                                <input name="email" type="email" class="form-control" id="userEmail" placeholder="Email" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="userPassword" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="userPassword" autocomplete="current-password" placeholder="Password">
+                                                <input name="password" type="password" class="form-control" id="userPassword" autocomplete="current-password" placeholder="Password" required>
                                             </div>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" id="authCheck">
                                                 <label class="form-check-label" for="authCheck">
-                                            Remember me
-                                            </label>
+                                                    Remember me
+                                                </label>
                                             </div>
                                             <div>
-                                                <a href="#" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</a>
+                                                <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</button>
                                             </div>
                                         </form>
                                     </div>
