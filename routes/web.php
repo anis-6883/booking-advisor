@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\SuperAdmin\AuthController;
-use App\Http\Controllers\SuperAdmin\DashboardController;
+use App\Http\Controllers\SuperAdmin\AuthController as SuperAdminAuthController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,15 +25,30 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Super Admin Routes
 Route::prefix('super-admin')->name('super_admin.')->group(function () {
 
     Route::middleware(['guest:super_admin'])->group(function () {
-        Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
+        Route::match(['get', 'post'], '/login', [SuperAdminAuthController::class, 'login'])->name('login');
     });
 
     Route::middleware(['auth:super_admin'])->group(function () {
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/logout', [SuperAdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
+    });
+    
+});
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::middleware(['guest:admin'])->group(function () {
+        Route::match(['get', 'post'], '/login', [AdminAuthController::class, 'login'])->name('login');
+    });
+
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     });
     
 });

@@ -148,11 +148,11 @@
                       </a>
                    </li>
                    <li class="dropdown-item py-2">
-                      <a href="{{ route('super_admin.logout') }}" class="text-body ms-0" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                      <a href="{{ route('admin.logout') }}" class="text-body ms-0" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <i class="me-2 icon-md" data-feather="log-out"></i>
                         <span>Log Out</span>
                       </a>
-                     <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
+                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                         @csrf
                      </form>
                    </li>

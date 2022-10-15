@@ -26,6 +26,9 @@ class RedirectIfAuthenticated
                 if($guard === 'super_admin'){
                     return redirect(RouteServiceProvider::SUPER_ADMIN_DASHBOARD);
                 }
+                if($guard === 'admin'){
+                    return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
+                }
                 
             }
         }
