@@ -22,16 +22,19 @@ class AuthController extends Controller
             if(Auth::guard('super_admin')->attempt($request->only(['email', 'password'])))
             {
                 $request->session()->regenerate();
-                return redirect()->intended('super_admin/dashboard');
+                session()->flash('success', 'Welcome Back!👋');
+                return redirect()->intended('super-admin/dashboard');
             }
 
-            return "No User...";
+            session()->flash('error', 'These credentials do not match our records!');
+            return redirect()->back()->withInput();
         }
     }
 
     public function logout()
     {
         Auth::guard('super_admin')->logout();
+        session()->flash('success', 'See you again!👋');
         return redirect()->route('super_admin.login');
     }
 

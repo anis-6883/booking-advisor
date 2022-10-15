@@ -1,207 +1,220 @@
-// (function ($) {
-//     "use strict";
-//     $(function () {
-//         var body = $("body");
-//         var mainWrapper = $(".main-wrapper");
-//         var footer = $("footer");
-//         var sidebar = $(".sidebar");
-//         var navbar = $(".navbar").not(".top-navbar");
+(function ($) {
+    "use strict";
+    $(function () {
+        var body = $("body");
+        var mainWrapper = $(".main-wrapper");
+        var footer = $("footer");
+        var sidebar = $(".sidebar");
+        var navbar = $(".navbar").not(".top-navbar");
 
-//         // Enable feather-icons with SVG markup
-//         feather.replace();
+        //     // For Buy Now button.
+        //     $("body").prepend('\
+        //   <div class="buy-now-wrapper">\
+        //     <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="btn btn-primary text-white fw-bolder btn-icon-text">\
+        //       <i data-feather="file-text"></i>\
+        //     </a>\
+        //     <a href="https://1.envato.market/nobleui_admin" target="_blank" class="btn btn-danger text-white fw-bolder btn-icon-text">\
+        //     <i class="btn-icon-prepend" data-feather="shopping-cart"></i>\
+        //     Buy Now\
+        //   </a>\
+        //   </div>\
+        // ');
 
-//         // initialize clipboard plugin
-//         if ($(".btn-clipboard").length) {
-//             // Enabling tooltip to all clipboard buttons
-//             $(".btn-clipboard")
-//                 .attr("data-bs-toggle", "tooltip")
-//                 .attr("title", "Copy to clipboard");
+        // Enable feather-icons with SVG markup
+        feather.replace();
 
-//             var clipboard = new ClipboardJS(".btn-clipboard");
+        // initialize clipboard plugin
+        if ($(".btn-clipboard").length) {
+            // Enabling tooltip to all clipboard buttons
+            $(".btn-clipboard")
+                .attr("data-bs-toggle", "tooltip")
+                .attr("title", "Copy to clipboard");
 
-//             clipboard.on("success", function (e) {
-//                 console.log(e);
-//                 e.trigger.innerHTML = "copied";
-//                 setTimeout(function () {
-//                     e.trigger.innerHTML = "copy";
-//                     e.clearSelection();
-//                 }, 700);
-//             });
-//         }
+            var clipboard = new ClipboardJS(".btn-clipboard");
 
-//         // initializing bootstrap tooltip
-//         var tooltipTriggerList = [].slice.call(
-//             document.querySelectorAll('[data-bs-toggle="tooltip"]')
-//         );
-//         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-//             return new bootstrap.Tooltip(tooltipTriggerEl);
-//         });
+            clipboard.on("success", function (e) {
+                console.log(e);
+                e.trigger.innerHTML = "copied";
+                setTimeout(function () {
+                    e.trigger.innerHTML = "copy";
+                    e.clearSelection();
+                }, 700);
+            });
+        }
 
-//         // initializing bootstrap popover
-//         var popoverTriggerList = [].slice.call(
-//             document.querySelectorAll('[data-bs-toggle="popover"]')
-//         );
-//         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-//             return new bootstrap.Popover(popoverTriggerEl);
-//         });
+        // initializing bootstrap tooltip
+        var tooltipTriggerList = [].slice.call(
+            document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
 
-//         // Applying perfect-scrollbar
-//         if ($(".sidebar .sidebar-body").length) {
-//             const sidebarBodyScroll = new PerfectScrollbar(".sidebar-body");
-//         }
-//         // commented beacuse of hang (scroll from  dropdown.html with small height)
-//         // if ($('.content-nav-wrapper').length) {
-//         //   const contentNavWrapper = new PerfectScrollbar('.content-nav-wrapper');
-//         // }
+        // initializing bootstrap popover
+        var popoverTriggerList = [].slice.call(
+            document.querySelectorAll('[data-bs-toggle="popover"]')
+        );
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl);
+        });
 
-//         // Close other submenu in sidebar on opening any
-//         sidebar.on("show.bs.collapse", ".collapse", function () {
-//             sidebar.find(".collapse.show").collapse("hide");
-//         });
+        // Applying perfect-scrollbar
+        if ($(".sidebar .sidebar-body").length) {
+            const sidebarBodyScroll = new PerfectScrollbar(".sidebar-body");
+        }
+        // commented beacuse of hang (scroll from  dropdown.html with small height)
+        // if ($('.content-nav-wrapper').length) {
+        //   const contentNavWrapper = new PerfectScrollbar('.content-nav-wrapper');
+        // }
 
-//         // Sidebar toggle to sidebar-folded
-//         $(".sidebar-toggler").on("click", function (e) {
-//             e.preventDefault();
-//             $(".sidebar-header .sidebar-toggler").toggleClass(
-//                 "active not-active"
-//             );
-//             if (window.matchMedia("(min-width: 992px)").matches) {
-//                 e.preventDefault();
-//                 body.toggleClass("sidebar-folded");
-//             } else if (window.matchMedia("(max-width: 991px)").matches) {
-//                 e.preventDefault();
-//                 body.toggleClass("sidebar-open");
-//             }
-//         });
+        // Close other submenu in sidebar on opening any
+        sidebar.on("show.bs.collapse", ".collapse", function () {
+            sidebar.find(".collapse.show").collapse("hide");
+        });
 
-//         // commmented because of apex chart width issue in desktop (in lg not in xl)
-//         // // sidebar-folded on large devices
-//         // function iconSidebar(e) {
-//         //   if (e.matches) {
-//         //     body.addClass('sidebar-folded');
-//         //   } else {
-//         //     body.removeClass('sidebar-folded');
-//         //   }
-//         // }
-//         // var desktopMedium = window.matchMedia('(min-width:992px) and (max-width: 1199px)');
-//         // desktopMedium.addListener(iconSidebar);
-//         // iconSidebar(desktopMedium);
+        // Sidebar toggle to sidebar-folded
+        $(".sidebar-toggler").on("click", function (e) {
+            e.preventDefault();
+            $(".sidebar-header .sidebar-toggler").toggleClass(
+                "active not-active"
+            );
+            if (window.matchMedia("(min-width: 992px)").matches) {
+                e.preventDefault();
+                body.toggleClass("sidebar-folded");
+            } else if (window.matchMedia("(max-width: 991px)").matches) {
+                e.preventDefault();
+                body.toggleClass("sidebar-open");
+            }
+        });
 
-//         // Settings sidebar toggle
-//         $(".settings-sidebar-toggler").on("click", function (e) {
-//             $("body").toggleClass("settings-open");
-//         });
+        // commmented because of apex chart width issue in desktop (in lg not in xl)
+        // // sidebar-folded on large devices
+        // function iconSidebar(e) {
+        //   if (e.matches) {
+        //     body.addClass('sidebar-folded');
+        //   } else {
+        //     body.removeClass('sidebar-folded');
+        //   }
+        // }
+        // var desktopMedium = window.matchMedia('(min-width:992px) and (max-width: 1199px)');
+        // desktopMedium.addListener(iconSidebar);
+        // iconSidebar(desktopMedium);
 
-//         // Sidebar theme settings
-//         $("input:radio[name=sidebarThemeSettings]").click(function () {
-//             $("body").removeClass("sidebar-light sidebar-dark");
-//             $("body").addClass($(this).val());
-//         });
+        // Settings sidebar toggle
+        $(".settings-sidebar-toggler").on("click", function (e) {
+            $("body").toggleClass("settings-open");
+        });
 
-//         //Add active class to nav-link based on url dynamically
-//         function addActiveClass(element) {
-//             if (current === "") {
-//                 //for root url
-//                 if (element.attr("href").indexOf("index.html") !== -1) {
-//                     element.parents(".nav-item").last().addClass("active");
-//                     if (element.parents(".sub-menu").length) {
-//                         element.closest(".collapse").addClass("show");
-//                         element.addClass("active");
-//                     }
-//                 }
-//             } else {
-//                 //for other url
-//                 if (element.attr("href").indexOf(current) !== -1) {
-//                     element.parents(".nav-item").last().addClass("active");
-//                     if (element.parents(".sub-menu").length) {
-//                         element.closest(".collapse").addClass("show");
-//                         element.addClass("active");
-//                     }
-//                     if (element.parents(".submenu-item").length) {
-//                         element.addClass("active");
-//                     }
-//                 }
-//             }
-//         }
+        // Sidebar theme settings
+        $("input:radio[name=sidebarThemeSettings]").click(function () {
+            $("body").removeClass("sidebar-light sidebar-dark");
+            $("body").addClass($(this).val());
+        });
 
-//         var current = location.pathname
-//             .split("/")
-//             .slice(-1)[0]
-//             .replace(/^\/|\/$/g, "");
-//         $(".nav li a", sidebar).each(function () {
-//             var $this = $(this);
-//             addActiveClass($this);
-//         });
+        //Add active class to nav-link based on url dynamically
+        function addActiveClass(element) {
+            if (current === "") {
+                //for root url
+                if (element.attr("href").indexOf("index.html") !== -1) {
+                    element.parents(".nav-item").last().addClass("active");
+                    if (element.parents(".sub-menu").length) {
+                        element.closest(".collapse").addClass("show");
+                        element.addClass("active");
+                    }
+                }
+            } else {
+                //for other url
+                if (element.attr("href").indexOf(current) !== -1) {
+                    element.parents(".nav-item").last().addClass("active");
+                    if (element.parents(".sub-menu").length) {
+                        element.closest(".collapse").addClass("show");
+                        element.addClass("active");
+                    }
+                    if (element.parents(".submenu-item").length) {
+                        element.addClass("active");
+                    }
+                }
+            }
+        }
 
-//         $(".horizontal-menu .nav li a").each(function () {
-//             var $this = $(this);
-//             addActiveClass($this);
-//         });
+        var current = location.pathname
+            .split("/")
+            .slice(-1)[0]
+            .replace(/^\/|\/$/g, "");
+        $(".nav li a", sidebar).each(function () {
+            var $this = $(this);
+            addActiveClass($this);
+        });
 
-//         //  open sidebar-folded when hover
-//         $(".sidebar .sidebar-body").hover(
-//             function () {
-//                 if (body.hasClass("sidebar-folded")) {
-//                     body.addClass("open-sidebar-folded");
-//                 }
-//             },
-//             function () {
-//                 if (body.hasClass("sidebar-folded")) {
-//                     body.removeClass("open-sidebar-folded");
-//                 }
-//             }
-//         );
+        $(".horizontal-menu .nav li a").each(function () {
+            var $this = $(this);
+            addActiveClass($this);
+        });
 
-//         // close sidebar when click outside on mobile/table
-//         $(document).on("click touchstart", function (e) {
-//             e.stopPropagation();
+        //  open sidebar-folded when hover
+        $(".sidebar .sidebar-body").hover(
+            function () {
+                if (body.hasClass("sidebar-folded")) {
+                    body.addClass("open-sidebar-folded");
+                }
+            },
+            function () {
+                if (body.hasClass("sidebar-folded")) {
+                    body.removeClass("open-sidebar-folded");
+                }
+            }
+        );
 
-//             // closing of sidebar menu when clicking outside of it
-//             if (!$(e.target).closest(".sidebar-toggler").length) {
-//                 var sidebar = $(e.target).closest(".sidebar").length;
-//                 var sidebarBody = $(e.target).closest(".sidebar-body").length;
-//                 if (!sidebar && !sidebarBody) {
-//                     if ($("body").hasClass("sidebar-open")) {
-//                         $("body").removeClass("sidebar-open");
-//                     }
-//                 }
-//             }
-//         });
+        // close sidebar when click outside on mobile/table
+        $(document).on("click touchstart", function (e) {
+            e.stopPropagation();
 
-//         //Horizontal menu in mobile
-//         $('[data-toggle="horizontal-menu-toggle"]').on("click", function () {
-//             $(".horizontal-menu .bottom-navbar").toggleClass("header-toggled");
-//         });
-//         // Horizontal menu navigation in mobile menu on click
-//         var navItemClicked = $(".horizontal-menu .page-navigation >.nav-item");
-//         navItemClicked.on("click", function (event) {
-//             if (window.matchMedia("(max-width: 991px)").matches) {
-//                 if (!$(this).hasClass("show-submenu")) {
-//                     navItemClicked.removeClass("show-submenu");
-//                 }
-//                 $(this).toggleClass("show-submenu");
-//             }
-//         });
+            // closing of sidebar menu when clicking outside of it
+            if (!$(e.target).closest(".sidebar-toggler").length) {
+                var sidebar = $(e.target).closest(".sidebar").length;
+                var sidebarBody = $(e.target).closest(".sidebar-body").length;
+                if (!sidebar && !sidebarBody) {
+                    if ($("body").hasClass("sidebar-open")) {
+                        $("body").removeClass("sidebar-open");
+                    }
+                }
+            }
+        });
 
-//         $(window).scroll(function () {
-//             if (window.matchMedia("(min-width: 992px)").matches) {
-//                 var header = $(".horizontal-menu");
-//                 if ($(window).scrollTop() >= 60) {
-//                     $(header).addClass("fixed-on-scroll");
-//                 } else {
-//                     $(header).removeClass("fixed-on-scroll");
-//                 }
-//             }
-//         });
+        //Horizontal menu in mobile
+        $('[data-toggle="horizontal-menu-toggle"]').on("click", function () {
+            $(".horizontal-menu .bottom-navbar").toggleClass("header-toggled");
+        });
+        // Horizontal menu navigation in mobile menu on click
+        var navItemClicked = $(".horizontal-menu .page-navigation >.nav-item");
+        navItemClicked.on("click", function (event) {
+            if (window.matchMedia("(max-width: 991px)").matches) {
+                if (!$(this).hasClass("show-submenu")) {
+                    navItemClicked.removeClass("show-submenu");
+                }
+                $(this).toggleClass("show-submenu");
+            }
+        });
 
-//         // Prevent body scrolling while sidebar scroll
-//         $(".sidebar .sidebar-body").hover(
-//             function () {
-//                 $("body").addClass("overflow-hidden");
-//             },
-//             function () {
-//                 $("body").removeClass("overflow-hidden");
-//             }
-//         );
-//     });
-// })(jQuery);
+        $(window).scroll(function () {
+            if (window.matchMedia("(min-width: 992px)").matches) {
+                var header = $(".horizontal-menu");
+                if ($(window).scrollTop() >= 60) {
+                    $(header).addClass("fixed-on-scroll");
+                } else {
+                    $(header).removeClass("fixed-on-scroll");
+                }
+            }
+        });
+
+        // Prevent body scrolling while sidebar scroll
+        $(".sidebar .sidebar-body").hover(
+            function () {
+                $("body").addClass("overflow-hidden");
+            },
+            function () {
+                $("body").removeClass("overflow-hidden");
+            }
+        );
+    });
+})(jQuery);

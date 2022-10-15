@@ -25,12 +25,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('super-admin')->name('super_admin.')->group(function () {
 
-    Route::middleware('guest:super_admin')->group(function () {
+    Route::middleware(['guest:super_admin'])->group(function () {
         Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
     });
 
-    Route::middleware('auth:super_admin')->group(function () {
-        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::middleware(['auth:super_admin'])->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
     
