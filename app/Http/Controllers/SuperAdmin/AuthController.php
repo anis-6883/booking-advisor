@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if(!$request->isMethod('POST'))
-            return view('super_admin.auth.login');
+            return view('super_admins.auth.login');
         else
         {
             $request->validate([
@@ -35,7 +35,7 @@ class AuthController extends Controller
     {
         Auth::guard('super_admin')->logout();
         session()->flash('success', 'See you again!👋');
-        return redirect()->route('super_admin.login');
+        return redirect()->route('super_admins.login');
     }
 
 }

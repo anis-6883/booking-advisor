@@ -18,17 +18,17 @@
                <span class="link-title">Dashboard</span>
              </a>
           </li>
-          <li class="nav-item nav-category">Hotel</li>
+          <li class="nav-item nav-category">Staff</li>
           <li class="nav-item">
              <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
              <i class="link-icon" data-feather="coffee"></i>
-             <span class="link-title">Hotel</span>
+             <span class="link-title">Staff</span>
              <i class="link-arrow" data-feather="chevron-down"></i>
              </a>
              <div class="collapse" id="emails">
                 <ul class="nav sub-menu">
                    <li class="nav-item">
-                      <a href="pages/email/inbox.html" class="nav-link">Hotel List</a>
+                      <a href="pages/email/inbox.html" class="nav-link">Staff List</a>
                    </li>
                    <li class="nav-item">
                       <a href="pages/email/read.html" class="nav-link">Read</a>

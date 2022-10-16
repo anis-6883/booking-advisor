@@ -22339,7 +22339,7 @@ div.tox .btn-icon-text.btn-lg.tox-button .btn-icon-prepend {
     box-shadow: none
 }
 
-.btn-group .dropdown-toggle:after,
+/* .btn-group .dropdown-toggle:after,
 .dropdown .dropdown-toggle:after {
     border-top: 0;
     border-right: 0;
@@ -22352,7 +22352,7 @@ div.tox .btn-icon-text.btn-lg.tox-button .btn-icon-prepend {
     vertical-align: middle;
     line-height: .625rem;
     font-size: .875rem
-}
+} */
 
 .btn-group.dropup .dropdown-toggle::after,
 .dropdown.dropup .dropdown-toggle::after {

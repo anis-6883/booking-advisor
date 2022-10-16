@@ -4,6 +4,7 @@ use App\Http\Controllers\SuperAdmin\AuthController as SuperAdminAuthController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\SuperAdmin\HotelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Super Admin Routes
-Route::prefix('super-admin')->name('super_admin.')->group(function () {
+Route::prefix('super-admin')->name('super_admins.')->group(function () {
 
     Route::middleware(['guest:super_admin'])->group(function () {
         Route::match(['get', 'post'], '/login', [SuperAdminAuthController::class, 'login'])->name('login');
@@ -35,6 +36,7 @@ Route::prefix('super-admin')->name('super_admin.')->group(function () {
     Route::middleware(['auth:super_admin'])->group(function () {
         Route::post('/logout', [SuperAdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('/hotels', HotelController::class);
     });
     
 });
