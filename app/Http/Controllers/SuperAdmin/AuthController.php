@@ -35,7 +35,7 @@ class AuthController extends Controller
     {
         Auth::guard('super_admin')->logout();
         session()->flash('success', 'See you again!👋');
-        return redirect()->route('super_admins.login');
+        return redirect()->route('super_admin.login');
     }
 
 }

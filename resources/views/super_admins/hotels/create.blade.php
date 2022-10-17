@@ -5,8 +5,8 @@
 @section('super_admins_content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('super_admins.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
-        <li class="breadcrumb-item"> <a class="text-muted" href="{{ route('super_admins.hotels.index') }}">Hotel</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('super_admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
+        <li class="breadcrumb-item"> <a class="text-muted" href="{{ route('super_admin.hotels.index') }}">Hotel</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create</li>
     </ol>
 </nav>
@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h3 class="mb-3">Add New <span style="color: #0C32DC;">Hotel</span></h3>
                         <hr>
-                        <form action="{{ route('super_admins.hotels.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="{{ route('super_admin.hotels.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             @method('POST')
 

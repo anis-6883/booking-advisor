@@ -1,4 +1,8 @@
 <script src="{{ asset('public/backend/plugins/core/core.js') }}"></script>
+<script src="{{ asset('public/backend/plugins/datatables.net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('public/backend/plugins/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('public/backend/plugins/select2/select2.min.js') }}"></script>
+<script src="{{ asset('public/backend/plugins/dropify/dropify.min.js') }}"></script>
 <script src="{{ asset('public/backend/plugins/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('public/backend/plugins/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('public/backend/plugins/feather-icons/feather.min.js') }}"></script>
@@ -47,3 +51,5 @@
     @endforeach
     
 </script>
+@yield('js-script')
+<script src="{{ asset('public/backend/js/custom.js') }}"></script>

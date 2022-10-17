@@ -1,12 +1,12 @@
-@extends('super_admins.layouts.app')
+@extends('admins.layouts.app')
 
 @section('page_title', 'Add Admin')
 
-@section('super_admins_content')
+@section('admins_content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('super_admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
-        <li class="breadcrumb-item"> <a class="text-muted" href="{{ route('super_admin.admins.index') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
+        <li class="breadcrumb-item"> <a class="text-muted" href="{{ route('admin.staffs.index') }}">Staff</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create</li>
     </ol>
 </nav>
@@ -16,24 +16,13 @@
             <div class="col-md-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="mb-3">Add New <span style="color: #0C32DC;">Admin</span></h3>
+                        <h3 class="mb-3">Add New <span style="color: #0C32DC;">Staff</span></h3>
                         <hr>
-                        <form action="{{ route('super_admin.admins.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="{{ route('admin.staffs.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             @method('POST')
 
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Hotel</label>
-                                        <select class="form-select select2" name="hotel_id" required>
-                                            <option selected value="">Select Hotel</option>
-                                            @foreach ($hotels as $hotel)
-                                                <option value="{{ $hotel->id }}">{{ $hotel->hotel_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div><!-- Col -->
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">First Name</label>

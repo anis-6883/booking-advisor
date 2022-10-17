@@ -9,7 +9,7 @@
     <h5 class="text-muted fw-normal mb-4 text-center">Welcome Back! Login to Super Admin Account.</h5>
     <hr>
     <h4 class="text-muted mb-2 lead">Super Admin Login</h4>
-    <form method="POST" action="{{ route('super_admins.login') }}">
+    <form method="POST" action="{{ route('super_admin.login') }}">
         @csrf
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope text-muted'></i></span>

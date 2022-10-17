@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
-class AdminController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +22,9 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        if(Auth::guard('super_admin')->check()) {
+        if(Auth::guard('admin')->check()) {
 
-            $admins = Admin::orderBy('id', 'DESC')->get();
+            $admins = Admin::where('hotel_id', Auth::user()->hotel_id)->orderBy('id', 'DESC')->get();
 
             if($request->ajax()) {
                 return DataTables::of($admins)
@@ -49,13 +48,13 @@ class AdminController extends Controller
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="' . route('super_admin.admins.edit', $admin->id) . '" class="dropdown-item">
+                                        <a href="' . route('admin.staffs.edit', $admin->id) . '" class="dropdown-item">
                                             <i class="fas fa-edit"></i>
                                                 Edit
                                         </a>
                                     </li>
                                     <li>
-                                        <form action="' . route('super_admin.admins.destroy', $admin->id) . '" method="post" class="ajax-delete">'
+                                        <form action="' . route('admin.staffs.destroy', $admin->id) . '" method="post" class="ajax-delete">'
                                             . csrf_field() 
                                             . method_field('DELETE') 
                                             . '<button type="button" class="btn-remove dropdown-item">
@@ -70,7 +69,7 @@ class AdminController extends Controller
                 ->rawColumns(['image', 'fullname', 'status', 'action'])
                 ->make(true);
             }
-            return view('super_admins.admins.index');
+            return view('admins.staffs.index');
         }
         abort(404);
     }
@@ -82,8 +81,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $hotels = Hotel::orderBy('id', 'DESC')->get();
-        return view("super_admins.admins.create", compact('hotels'));
+        return view("admins.staffs.create");
     }
 
     /**
@@ -95,7 +93,6 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'hotel_id' => 'required',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
@@ -111,7 +108,7 @@ class AdminController extends Controller
         DB::beginTransaction();
 
         $admin = new Admin();
-        $admin->hotel_id = $request->hotel_id;
+        $admin->hotel_id = Auth::guard('admin')->user()->hotel_id;
         $admin->first_name = $request->first_name;
         $admin->last_name = $request->last_name;
         $admin->email = $request->email;
@@ -121,7 +118,7 @@ class AdminController extends Controller
         
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $ImageName = 'HOTEL_' .time() . '.' . $image->getClientOriginalExtension();
+            $ImageName = 'STAFF_' .time() . '.' . $image->getClientOriginalExtension();
             $image->move(base_path('public/uploads/images/admins/'), $ImageName);
             $admin->image = 'public/uploads/images/admins/' . $ImageName;
         }
@@ -132,7 +129,7 @@ class AdminController extends Controller
         
         // Cache::forget("admin_$admin->id");
 
-        return redirect('super-admin/admins')->with('success', 'Information has been added!');
+        return redirect('admin/staffs')->with('success', 'Information has been added!');
     }
 
     /**
@@ -144,8 +141,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = Admin::findOrFail($id);
-        $hotels = Hotel::orderBy('id', 'DESC')->get();
-        return view("super_admins.admins.edit", compact('admin', 'hotels'));
+        return view("admins.staffs.edit", compact('admin'));
     }
 
     /**
@@ -158,7 +154,6 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'hotel_id' => 'required',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => [
@@ -177,7 +172,6 @@ class AdminController extends Controller
         DB::beginTransaction();
 
         $admin = Admin::findOrFail($id);
-        $admin->hotel_id = $request->hotel_id;
         $admin->first_name = $request->first_name;
         $admin->last_name = $request->last_name;
         $admin->email = $request->email;
@@ -188,7 +182,7 @@ class AdminController extends Controller
         
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $ImageName = 'ADMIN_' .time() . '.' . $image->getClientOriginalExtension();
+            $ImageName = 'STAFF_' .time() . '.' . $image->getClientOriginalExtension();
             $image->move(base_path('public/uploads/images/admins/'), $ImageName);
             $admin->image = 'public/uploads/images/admins/' . $ImageName;
 
@@ -205,7 +199,7 @@ class AdminController extends Controller
         
         // Cache::forget("admin_$admin->id");
 
-        return redirect('super-admin/admins')->with('success', 'Information has been updated!');
+        return redirect('admin/staffs')->with('success', 'Information has been updated!');
     }
 
     /**
@@ -216,14 +210,14 @@ class AdminController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $admin = Admin::findOrFail($id);
-        $image_path = $admin->image;
+        $staff = Admin::findOrFail($id);
+        $image_path = $staff->image;
 
         if($image_path != "public/default/profile.png")
             if(File::exists($image_path))
                 File::delete($image_path);
 
-        $admin->delete();
+        $staff->delete();
 
         if (!$request->ajax()) {
             return back()->with('success', 'Information has been deleted!');

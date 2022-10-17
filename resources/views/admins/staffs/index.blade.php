@@ -1,12 +1,12 @@
-@extends('super_admins.layouts.app')
+@extends('admins.layouts.app')
 
-@section('page_title', 'Hotel List')
+@section('page_title', 'Staff List')
 
-@section('super_admins_content')
+@section('admins_content')
 <nav class="page-breadcrumb">
    <ol class="breadcrumb">
-       <li class="breadcrumb-item"><a href="{{ route('super_admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
-       <li class="breadcrumb-item active" aria-current="page">Hotels</li>
+       <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
+       <li class="breadcrumb-item active" aria-current="page">Staff</li>
    </ol>
 </nav>
 
@@ -14,10 +14,10 @@
    <div class="col-12 col-xl-12 stretch-card">
       <div class="card">
          <div class="card-body">
-            <h3 class="mb-3">Hotel <span style="color: #0C32DC;">List</span></h3>
+            <h3 class="mb-3">Staff <span style="color: #0C32DC;">List</span></h3>
             <div class="d-flex justify-content-end">
-               <a class="btn btn-outline-primary btn-sm" href="{{ route('super_admin.hotels.create') }}">
-                  <i class="fas fa-plus mr-1" style="font-size: 13px"></i> Add Hotel
+               <a class="btn btn-outline-primary btn-sm" href="{{ route("admin.staffs.create") }}">
+                  <i class="fas fa-plus mr-1" style="font-size: 13px"></i> Add Staff
                </a>
             </div>
             <hr>
@@ -26,11 +26,10 @@
                   <table id="data-table" class="table table-bordered table-striped" style="width:100%">
                      <thead>
                          <tr>
-                             <th style=" white-space: nowrap;">Name</th>
+                             <th style=" white-space: nowrap;">Image</th>
+                             <th style=" white-space: nowrap;">Fullname</th>
                              <th style=" white-space: nowrap;">Email</th>
-                             <th style=" white-space: nowrap;">Division</th>
-                             <th style=" white-space: nowrap;">District</th>
-                             <th style=" white-space: nowrap;">Upazila</th>
+                             <th style=" white-space: nowrap;">Phone</th>
                              <th style=" white-space: nowrap; width: 10%;">Status</th>
                              <th class="text-center">Action</th>
                          </tr>
@@ -52,14 +51,13 @@
    $('#data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: _url + "/super-admin/hotels",
+        ajax: _url + "/admin/staffs",
         "columns" : [
 
-        { data : "hotel_name", name : "hotel_name" },
-        { data : "hotel_email", name : "hotel_email" },
-        { data : "division", name : "division" },
-        { data : "district", name : "district" },
-        { data : "upazila", name : "upazila" },
+        { data : "image", name : "image" },
+        { data : "fullname", name : "fullname" },
+        { data : "email", name : "email" },
+        { data : "phone", name : "phone" },
         { data : "status", name : "status", className : "text-center", orderable : false, searchable : false },
         { data : "action", name : "action", orderable : false, searchable : false, className : "text-center" }
 

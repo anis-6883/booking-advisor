@@ -41,13 +41,13 @@ class HotelController extends Controller
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="' . route('super_admins.hotels.edit', $hotel->id) . '" class="dropdown-item">
+                                        <a href="' . route('super_admin.hotels.edit', $hotel->id) . '" class="dropdown-item">
                                             <i class="fas fa-edit"></i>
                                                 Edit
                                         </a>
                                     </li>
                                     <li>
-                                        <form action="' . route('super_admins.hotels.destroy', $hotel->id) . '" method="post" class="ajax-delete">'
+                                        <form action="' . route('super_admin.hotels.destroy', $hotel->id) . '" method="post" class="ajax-delete">'
                                             . csrf_field() 
                                             . method_field('DELETE') 
                                             . '<button type="button" class="btn-remove dropdown-item">

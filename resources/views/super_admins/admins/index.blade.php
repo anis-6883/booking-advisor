@@ -5,7 +5,7 @@
 @section('super_admins_content')
 <nav class="page-breadcrumb">
    <ol class="breadcrumb">
-       <li class="breadcrumb-item"><a href="{{ route('super_admins.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
+       <li class="breadcrumb-item"><a href="{{ route('super_admin.dashboard') }}"><i class='fas fa-home text-muted'></i></a></li>
        <li class="breadcrumb-item active" aria-current="page">Admin</li>
    </ol>
 </nav>
@@ -16,7 +16,7 @@
          <div class="card-body">
             <h3 class="mb-3">Admin <span style="color: #0C32DC;">List</span></h3>
             <div class="d-flex justify-content-end">
-               <a class="btn btn-outline-primary btn-sm" href="{{ route("super_admins.admins.create") }}">
+               <a class="btn btn-outline-primary btn-sm" href="{{ route("super_admin.admins.create") }}">
                   <i class="fas fa-plus mr-1" style="font-size: 13px"></i> Add Admin
                </a>
             </div>
