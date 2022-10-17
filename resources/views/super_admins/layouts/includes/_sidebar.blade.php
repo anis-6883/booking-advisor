@@ -11,7 +11,6 @@
     </div>
     <div class="sidebar-body">
        <ul class="nav">
-          <li class="nav-item nav-category">Main</li>
           <li class="nav-item {{ request()->routeIs('super_admins.dashboard') ? 'active' : '' }}">
              <a href="{{ route('super_admins.dashboard') }}" class="nav-link">
                <i class="link-icon" data-feather="box"></i>
@@ -22,12 +21,12 @@
           
           
           <li class="nav-item {{ request()->routeIs('super_admins.hotels*') ? 'active' : '' }}">
-             <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="{{ request()->routeIs('super_admins.hotels*') ? 'true' : 'false' }}" aria-controls="emails">
+             <a class="nav-link" data-bs-toggle="collapse" href="#hotels" role="button" aria-expanded="{{ request()->routeIs('super_admins.hotels*') ? 'true' : 'false' }}" aria-controls="hotels">
              <i class="link-icon" data-feather="coffee"></i>
              <span class="link-title">Hotel</span>
              <i class="link-arrow" data-feather="chevron-down"></i>
              </a>
-             <div class="collapse {{ request()->routeIs('super_admins.hotels*') ? 'show' : '' }}" id="emails">
+             <div class="collapse {{ request()->routeIs('super_admins.hotels*') ? 'show' : '' }}" id="hotels">
                 <ul class="nav sub-menu">
                    <li class="nav-item">
                       <a href="{{ route('super_admins.hotels.index') }}" class="nav-link {{ request()->routeIs('super_admins.hotels.index') ? 'active' : '' }}">
@@ -37,6 +36,30 @@
                    <li class="nav-item">
                       <a href="{{ route('super_admins.hotels.create') }}" class="nav-link {{ request()->routeIs('super_admins.hotels.create') ? 'active' : '' }}">
                         Add Hotel
+                     </a>
+                   </li>
+                </ul>
+             </div>
+          </li>
+
+          <li class="nav-item nav-category">Admin</li>
+
+          <li class="nav-item {{ request()->routeIs('super_admins.admins*') ? 'active' : '' }}">
+             <a class="nav-link" data-bs-toggle="collapse" href="#admins" role="button" aria-expanded="{{ request()->routeIs('super_admins.admins*') ? 'true' : 'false' }}" aria-controls="admins">
+             <i class="link-icon" data-feather="user"></i>
+             <span class="link-title">Admin</span>
+             <i class="link-arrow" data-feather="chevron-down"></i>
+             </a>
+             <div class="collapse {{ request()->routeIs('super_admins.admins*') ? 'show' : '' }}" id="admins">
+                <ul class="nav sub-menu">
+                   <li class="nav-item">
+                      <a href="{{ route('super_admins.admins.index') }}" class="nav-link {{ request()->routeIs('super_admins.admins.index') ? 'active' : '' }}">
+                        Admin List
+                     </a>
+                   </li>
+                   <li class="nav-item">
+                      <a href="{{ route('super_admins.admins.create') }}" class="nav-link {{ request()->routeIs('super_admins.admins.create') ? 'active' : '' }}">
+                        Add Admin
                      </a>
                    </li>
                 </ul>

@@ -59,7 +59,7 @@ class HotelController extends Controller
                                 </ul>
                         </div>';
                 })
-                ->rawColumns(['action', 'status'])
+                ->rawColumns(['status', 'action'])
                 ->make(true);
             }
             return view('super_admins.hotels.index');
@@ -120,14 +120,15 @@ class HotelController extends Controller
         $hotel->mobile_one = $request->mobile_one;
         $hotel->mobile_two = $request->mobile_two;
         $hotel->approved_by = Auth::guard('super_admin')->user()->id;
-        $hotel->save();
-
+        
         if ($request->hasFile('hotel_image')) {
             $image = $request->file('hotel_image');
             $ImageName = 'HOTEL_' .time() . '.' . $image->getClientOriginalExtension();
             $image->move(base_path('public/uploads/images/hotels/'), $ImageName);
             $hotel->hotel_image = 'public/uploads/images/hotels/' . $ImageName;
         }
+
+        $hotel->save();
 
         DB::commit();
         
@@ -194,7 +195,6 @@ class HotelController extends Controller
         $hotel->phone_two = $request->phone_two;
         $hotel->mobile_one = $request->mobile_one;
         $hotel->mobile_two = $request->mobile_two;
-        $hotel->save();
 
         $prevImageName = $hotel->hotel_image;
 
@@ -211,6 +211,8 @@ class HotelController extends Controller
             }
         }
 
+        $hotel->save();
+        
         DB::commit();
         
         // Cache::forget("hotel_$hotel->id");

@@ -60,6 +60,6 @@ tbody tr:hover {
 
 @media screen and (max-width: 767px) {
     #submit-trigger{
-        bottom: 125px;
+        bottom: 110px;
     }
 }
