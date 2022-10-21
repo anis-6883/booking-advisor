@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -15,7 +16,10 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        $superAdminRole = Role::create(['name' => 'super_admin']);
+        $admin = Admin::where('email', 'admin@email.com')->first();
+        $superAdminRole = Role::create(['name' => 'admin']);
+
+        $admin->assignRole('admin');
 
         $permissions = [
             // hotel permission
@@ -23,6 +27,7 @@ class RolePermissionSeeder extends Seeder
             'hotels.create',
             'hotels.edit',
             'hotels.destroy',
+            
             // admin permission
             'admins.index',
             'admins.create',
@@ -30,8 +35,10 @@ class RolePermissionSeeder extends Seeder
             'admins.destroy',
         ];
 
+
         foreach($permissions as $permission) {
             $superAdminRole->givePermissionTo(Permission::create(['name' => $permission]));
+            
         }   
 
         // $role->givePermissionTo($permission);

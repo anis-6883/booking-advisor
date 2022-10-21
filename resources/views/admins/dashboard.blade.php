@@ -1,6 +1,6 @@
 @extends('admins.layouts.app')
 
-@section('page_title', 'Super Admin Dashboard')
+@section('page_title', 'Admin Dashboard')
 
 @section('admins_content')
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">

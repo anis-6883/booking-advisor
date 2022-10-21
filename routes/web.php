@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\SuperAdmin\AdminController;
 use App\Http\Controllers\SuperAdmin\HotelController;
+use App\Http\Controllers\SuperAdmin\PermissionController;
+use App\Http\Controllers\SuperAdmin\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,8 @@ Route::prefix('super-admin')->name('super_admin.')->group(function () {
         Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('hotels', HotelController::class);
         Route::resource('admins', AdminController::class);
+        Route::resource('permissions', PermissionController::class);
+        Route::resource('roles', RoleController::class);
     });
     
 });

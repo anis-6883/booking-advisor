@@ -34,6 +34,17 @@
                                         </select>
                                     </div>
                                 </div><!-- Col -->
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Role</label>
+                                        <select class="form-select select2" name="role_id" required>
+                                            <option selected value="">Select Role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div><!-- Col -->
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">First Name</label>

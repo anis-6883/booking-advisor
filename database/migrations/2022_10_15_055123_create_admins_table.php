@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hotel_id');
+            $table->unsignedBigInteger('role_id');
             $table->string('first_name', 127);
             $table->string('last_name', 127);
             $table->string('email', 127)->unique();

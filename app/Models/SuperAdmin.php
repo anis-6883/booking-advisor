@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
 class SuperAdmin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +45,9 @@ class SuperAdmin extends Authenticatable
     public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
+    }
+
+    public function nothing($age) {
+        return $age > 30;
     }
 }

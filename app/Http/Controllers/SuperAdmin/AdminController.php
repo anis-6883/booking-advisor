@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Hotel;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -83,7 +84,8 @@ class AdminController extends Controller
     public function create()
     {
         $hotels = Hotel::orderBy('id', 'DESC')->get();
-        return view("super_admins.admins.create", compact('hotels'));
+        $roles = Role::orderBy('id', 'DESC')->get();
+        return view("super_admins.admins.create", compact('hotels', 'roles'));
     }
 
     /**
@@ -96,6 +98,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'hotel_id' => 'required',
+            'role_id' => 'required',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
@@ -112,6 +115,7 @@ class AdminController extends Controller
 
         $admin = new Admin();
         $admin->hotel_id = $request->hotel_id;
+        $admin->role_id = $request->role_id;
         $admin->first_name = $request->first_name;
         $admin->last_name = $request->last_name;
         $admin->email = $request->email;
@@ -145,7 +149,8 @@ class AdminController extends Controller
     {
         $admin = Admin::findOrFail($id);
         $hotels = Hotel::orderBy('id', 'DESC')->get();
-        return view("super_admins.admins.edit", compact('admin', 'hotels'));
+        $roles = Role::orderBy('id', 'DESC')->get();
+        return view("super_admins.admins.edit", compact('admin', 'hotels', 'roles'));
     }
 
     /**
@@ -159,6 +164,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'hotel_id' => 'required',
+            'role_id' => 'required',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => [
@@ -178,6 +184,7 @@ class AdminController extends Controller
 
         $admin = Admin::findOrFail($id);
         $admin->hotel_id = $request->hotel_id;
+        $admin->role_id = $request->role_id;
         $admin->first_name = $request->first_name;
         $admin->last_name = $request->last_name;
         $admin->email = $request->email;
