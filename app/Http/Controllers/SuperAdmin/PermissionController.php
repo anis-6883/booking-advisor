@@ -97,7 +97,8 @@ class PermissionController extends Controller
 
         DB::commit();
 
-        return redirect('super-admin/permissions')->with('success', 'Information has been added!');
+        return back()->with('success', 'Information has been added!');
+        // return redirect('super-admin/permissions')->with('success', 'Information has been added!');
     }
 
     /**

@@ -14,7 +14,7 @@
                 @include('admins.layouts.includes._navbar')
 
                 <div class="page-content">
-                @yield('admins_content')
+                    @yield('admins_content')
                 </div>
 
                 <!-- Footer -->

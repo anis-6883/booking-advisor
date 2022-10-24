@@ -46,4 +46,26 @@ class Admin extends Authenticatable
     {
         return $this->first_name . " " . $this->last_name;
     }
+
+    public static function isAdmin($role_id){
+        $role = Role::find($role_id);
+        if($role->name != 'Admin'){
+            return false;
+        }
+        return true;
+    }
+
+    public static function hasPermissionTo($premission_name, $role_id)
+    {
+        $permission = Permission::where('name', $premission_name)->first();
+
+        $exists = RolePermission::where('role_id', $role_id)
+            ->where('permission_id', $permission->id)
+            ->exists();
+            
+        if($exists)
+            return true;
+        else
+            return false;
+    }
 }

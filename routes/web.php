@@ -2,9 +2,14 @@
 
 use App\Http\Controllers\SuperAdmin\AuthController as SuperAdminAuthController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\BedTypeController;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\RoomFacilityController;
+use App\Http\Controllers\Admin\RoomImageController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SuperAdmin\AdminController;
 use App\Http\Controllers\SuperAdmin\HotelController;
 use App\Http\Controllers\SuperAdmin\PermissionController;
@@ -29,6 +34,7 @@ Route::get('/', function () {
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/update-status', [AjaxController::class, 'updateStatus'])->name('update.status');
 
 // Super Admin Routes
 Route::prefix('super-admin')->name('super_admin.')->group(function () {
@@ -58,7 +64,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth:admin'])->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::delete('/destroy/room-images', [RoomImageController::class, 'destroyAll'])->name('room.images.destroy.all');
         Route::resource('staffs', StaffController::class);
+        Route::resource('room-settings/bed-types', BedTypeController::class);
+        Route::resource('room-settings/room-facilities', RoomFacilityController::class);
+        Route::resource('room-settings/rooms', RoomController::class);
+        Route::resource('room-settings/room-images', RoomImageController::class);
     });
     
 });
